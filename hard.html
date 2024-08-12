@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: rgba(15, 15, 15, 0.897);
+    }
+
+    .card {
+        width: 90%;
+        max-width: 600px;
+        margin: 100px auto 0px;
+        padding: 30px;
+        border-radius: 20px;
+        background-color: white;
+        background-image: url(https://static.vecteezy.com/system/resources/previews/006/691/884/non_2x/blue-question-mark-background-with-text-space-quiz-symbol-vector.jpg);
+        background-size: cover;
+    }
+
+    .Ans {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-radius: 8px;
+        border: 0px;
+        background-color: rgb(243, 220, 190);
+
+    }
+
+    .Ans:hover:not([disabled]) {
+        background-color: #b3a4a4;
+        border: 1px solid;
+    }
+
+    .Ans:disabled {
+        cursor: no-drop;
+    }
+
+    .sub {
+        width: 100px;
+        display: block;
+        padding: 5px;
+        margin: 10px auto 0;
+        background-color: rgb(220, 255, 216);
+        border: 0px;
+        border-radius: 3px;
+        cursor: pointer;
+
+    }
+
+    .sub:hover {
+        background-color: burlywood;
+    }
+
+    /* .Ans{
+        width: 100%;
+        background-color: aqua;
+        border: 1px solid black;
+        padding: 10px;
+    } */
+    .correct {
+        background-color: green;
+        color: black;
+    }
+
+    .incorrect {
+        background-color: rgb(218, 76, 76);
+        color: black;
+    }
+    .Logout{
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+    }
+    .logBtn{
+        background-color:rgb(209, 234, 235);
+        padding: 6px;
+        border: none;
+        border-radius: 5px;
+        width: 70px;
+    }
+</style>
+
+<body>
+    <div class="card">
+        <h1>Quiz questions</h1>
+        <hr>
+        <div class="quiz">
+            <h2 id="question">question</h2>
+
+            <div id="answers-buttons">
+                <button class="Ans">Answers</button>
+                <button class="Ans">Answers</button>
+                <button class="Ans">Answers</button>
+                <button class="Ans">Answers</button>
+            </div>
+            <button class="sub" id="next-btn">submit</button>
+        </div>
+    </div>
+    <div class="Logout">
+        <button class="logBtn">
+            <a href="./Usersignup.html" style="text-decoration: none; color: red; font-weight: bold;">Logout</a></button>
+    </div>
+
+
+    <script>
+        var questions = [
+   
+    {
+        question: "console.log(('b' + 'a' + + 'a' + 'a').toLowerCase());",
+        answers: [
+
+            { text: "bananaa", correct: false },
+            { text: "baaa", correct: false },
+            { text: "ananas", correct: false },
+            { text: "banana", correct: true },
+
+        ]
+    },
+    {
+        question: "console.log(0.1 + 0.2 == 0.3);",
+        answers: [
+
+            { text: "true", correct: false },
+            { text: " false", correct: true },
+           
+        ]
+    },
+    {
+        question: "const obj1 = {first: 20, second: 30, first: 50}; <br> console.log(obj1);",
+        answers: [
+
+            { text: "Syntax Error", correct: false },
+            { text: "{first:20,second:30}", correct: false },
+            { text: "{first:50,second:30}", correct: true },
+            { text: "{first:20,second:30,first:50}", correct: false },
+
+        ]
+    },
+    {
+        question: "Why JavaScript Engine is needed?",
+        answers: [
+
+            { text: " Both Compiling & Interpreting the JavaScript", correct: false },
+            { text: "Parsing the javascript", correct: false },
+            { text: "Compiling the JavaScript", correct: false },
+            { text: " Interpreting the JavaScript", correct: true },
+
+        ]
+    },
+    {
+        question: "int a=0; <br>for(a;a<5;a++); <br> console.log(a);",
+        answers: [
+
+            { text: "0", correct: false },
+            { text: "4", correct: false },
+            { text: "5", correct: true },
+            { text: "Error", correct: false },
+
+        ]
+    },
+    {
+        question: "function javascript() {};",
+        answers: [
+
+            { text: "A custom constructor", correct: true },
+            { text: "Prototype of a function", correct: false },
+            { text: "Function javascript", correct: false },
+            { text: "Not valid", correct: false },
+
+        ]
+    },
+    {
+        question: "Why event handlers is needed in JS?",
+        answers: [
+
+            { text: "Adds innerHTML page to the code", correct: false },
+            { text: "Change the server location", correct: false },
+            { text: "Allows JavaScript code to alter the behaviour of windows", correct: true },
+            { text: "Performs handling of exceptions and occurrences", correct: false },
+
+        ]
+    }, {
+        question: "Which of the following is not a framework?",
+        answers: [
+
+            { text: "JavaScript .NET", correct: false },
+            { text: " JavaScript", correct: false },
+            { text: " JavaScript", correct: true },
+            { text: "jQuery", correct: false },
+
+        ]
+    },
+    {
+        question: " Which of the following is the property that is triggered in response to JS errors?",
+        answers: [
+
+            { text: "onclick", correct: false },
+            { text: "onerror", correct: false },
+            { text: "onmessage", correct: true },
+            { text: "onexception", correct: false },
+
+        ]
+    },
+    {
+        question: " Will the following JavaScript code work? <br> var js = (function(x) {return x*x;}(10));",
+        answers: [
+
+            { text: "Error", correct: false },
+            { text: "Exception will be thrown", correct: false },
+            { text: "Memory leak", correct: false },
+            { text: "Yes, perfectly", correct: true },
+
+
+        ]
+    },
+];
+ questionElement = document.getElementById("question");
+ answerButton = document.getElementById("answers-buttons");
+ nextButton = document.getElementById("next-btn");
+
+ currentQuestionIndex = 0;
+ score = 0;
+
+function startQuiz() {
+
+    currentQuestionIndex = 0;
+    score = 0;
+    nextButton.innerHTML = "Submit";
+    showQuestion();
+}
+function showQuestion() {
+    resetState()
+     currentQuestion = questions[currentQuestionIndex];
+     questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+
+    currentQuestion.answers.forEach(answer => {
+         button = document.createElement("button");
+        button.innerHTML = answer.text;
+        button.classList.add("Ans");
+        answerButton.appendChild(button);
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener("click", selectAnswer);
+
+    })
+}
+
+
+function resetState() {
+    nextButton.style.display = "none"
+    while (answerButton.firstChild) {
+        answerButton.removeChild(answerButton.firstChild);
+    }
+}
+
+function selectAnswer(e) {
+     selectedBtn = e.target;
+     isCorrect = selectedBtn.dataset.correct === "true";
+    if (isCorrect) {
+        selectedBtn.classList.add("correct");
+        score++;
+    }
+    else {
+        selectedBtn.classList.add("incorrect");
+    }
+    Array.from(answerButton.children).forEach(button => {
+        if (button.dataset.correct === "true") {
+
+        }
+        button.disabled = "true"
+    });
+    nextButton.style.display = "block"
+
+}
+function showScore() {
+    resetState();
+    questionElement.innerHTML = `you scored ${score} out of ${questions.length}!`
+    nextButton.innerHTML = "play again";
+    nextButton.style.direction = "block"
+}
+function handleNextButton() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        showQuestion()
+    }
+    else {
+        showScore();
+    }
+}
+nextButton.addEventListener("click", () => {
+    if (currentQuestionIndex < questions.length) {
+        handleNextButton();
+
+    }
+    else {
+        startQuiz()
+    }
+})
+startQuiz()
+
+
+    </script>
+
+</body>
+
+</html>

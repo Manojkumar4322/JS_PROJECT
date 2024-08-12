@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: rgba(15, 15, 15, 0.897);
+    }
+
+    .card {
+        width: 90%;
+        max-width: 600px;
+        margin: 100px auto 0px;
+        padding: 30px;
+        border-radius: 20px;
+        background-color: white;
+        background-image: url(https://media.istockphoto.com/id/158365614/vector/questions-a-plenty.jpg?s=1024x1024&w=is&k=20&c=OZSEtK3pb-FFzyuEtiy6t77sgZuCbEUmlQy9jglHySE=);
+        
+    }
+
+    .Ans {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-radius: 8px;
+        border: 0px;
+        background-color: rgb(238, 232, 225);
+
+    }
+
+    .Ans:hover:not([disabled]) {
+        background-color: #b3a4a4;
+        border: 1px solid;
+    }
+
+    .Ans:disabled {
+        cursor: no-drop;
+    }
+
+    .sub {
+        width: 100px;
+        display: block;
+        padding: 5px;
+        margin: 10px auto 0;
+        background-color: rgb(220, 255, 216);
+        border: 0px;
+        border-radius: 3px;
+        cursor: pointer;
+
+    }
+
+    .sub:hover {
+        background-color: burlywood;
+    }
+
+    /* .Ans{
+        width: 100%;
+        background-color: aqua;
+        border: 1px solid black;
+        padding: 10px;
+    } */
+    .correct {
+        background-color: green;
+        color: black;
+    }
+
+    .incorrect {
+        background-color: rgb(218, 76, 76);
+        color: black;
+    }
+    .Logout{
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+    }
+    .logBtn{
+        background-color:cadetblue;
+        padding: 6px;
+        border: none;
+        border-radius: 5px;
+        width: 70px;
+    }
+   
+</style>
+
+<body>
+    <div class="card">
+        <h1>Quiz questions</h1>
+        <hr>
+        <div class="quiz">
+            <h2 id="question">question</h2>
+
+            <div id="answers-buttons">
+                <button class="Ans">Answers</button>
+                <button class="Ans">Answers</button>
+                <button class="Ans">Answers</button>
+                <button class="Ans">Answers</button>
+            </div>
+            <button class="sub" id="next-btn">submit</button>
+        </div>
+    </div>
+    <div class="Logout">
+        <button class="logBtn">
+            <a href="./Usersignup.html" style="text-decoration: none; color: red; font-weight: bold;">Logout</a></button>
+    </div>
+
+
+
+    <script src="quiz.js">
+
+
+    </script>
+
+</body>
+
+</html>

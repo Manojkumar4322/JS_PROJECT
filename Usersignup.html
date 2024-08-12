@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #080000;
+        font-family: Arial, sans-serif;
+
+    }
+
+    .container {
+        background-color: yellow;
+        background-size: cover;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: rgba(184, 178, 178, 0.959);
+        width: 250px;
+        height: 460px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 1rem;
+
+    }
+
+    input {
+        width: 100%;
+        background-color: yellow;
+        margin-bottom: 20px;
+        padding: 4px;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        outline: none;
+
+    }
+
+    .btn {
+        background-color: black;
+        color: yellow;
+        margin-left: 30%;
+        margin-top: 5%;
+        border: 0px;
+        width: 100px;
+        padding: 7px;
+        border-radius: 10px;
+    }
+
+    /* .btn2{
+        display: block; 
+        background-color: rgb(14, 1, 1); 
+        width: 100px; 
+        margin-left: 30%; 
+        margin-top: 10px;
+        border: 0px;
+        padding: 6px;
+        border-radius: 10px;
+    } */
+    .anc {
+        display: block;
+        margin-left: 42%;
+        margin-top: 5%;
+        color: black;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <h1 style="text-decoration: underline; text-align: center;">Quiz Sign up</h1>
+        <form action="" id="loginForm">
+            <label for=""> Name</label>
+            <input type="text" id="user">
+            <label for="">Email</label>
+            <input type="email" name="" id="mail">
+            <label for=""> Password</label>
+            <input type="password" name="" id="pass">
+            <label for="">Confirm Password</label>
+            <input type="password" name="" id="cpass">
+           
+        </form>
+        <button class="btn" id="signup"> Sign up</button>
+        <a href="./userlogin.html" class="anc">Login</a>
+
+    </div>
+    <script>
+        let isSubmitted = false;
+    
+    document.getElementById("signup").addEventListener("click", function () {
+        if (isSubmitted) {
+            window.location.assign("UserLogin.html");
+            return;
+        }
+
+        var user = document.getElementById("user");
+        var mail = document.getElementById("mail");
+        var pass = document.getElementById("pass");
+        var cpass = document.getElementById("cpass");
+
+        if (!/^[\w]+$/.test(user.value)) {
+                alert("Check your username. Only alphanumeric characters are allowed.");
+                user.focus();
+                return;
+            }
+    
+            if (!/@gmail\.com$/.test(mail.value)) {
+                alert("Please check your email address.");
+                mail.focus();
+                return;
+            }
+    
+            if (!/^[A-Z]/.test(pass.value) || !/[0-9]/.test(pass.value) || !/[@#$%&*]/.test(pass.value)) {
+                alert("Please add a capital letter, number, and special character for a strong password.");
+                pass.focus();
+                return;
+            }
+    
+            if (pass.value !== cpass.value) {
+                alert("Passwords don't match.");
+                cpass.focus();
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            let newUser = { user: user.value, mail: mail.value, pass: pass.value, };
+    
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].user === user.value || users[i].mail === mail.value) {
+                    alert("User already exists. Please log in.");
+                    window.location.assign("./UserLogin.html");
+                    return;
+                }
+            }
+    
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+    
+            const options = {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify({ Username: user.value, Email: mail.value, Password: pass.value, PhoneNumber: num.value })
+            };
+            fetch("http://localhost:3000/signup", options)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Success:", data);
+                    if (confirm("Registration Successful")) {
+                        window.location.assign("Login.html");
+                        alert("Sign up Successful ,Please do login")
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+    
+            isSubmitted = true;
+            document.getElementById('signup-form').reset();
+
+        });
+
+    </script>
+</body>
+
+</html>
